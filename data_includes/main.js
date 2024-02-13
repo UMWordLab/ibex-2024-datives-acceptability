@@ -26,53 +26,42 @@ var defaults = [
     }
 ];
 
-// Consent form
-newTrial("consent",
-    newHtml("consent_form", "consent.html")
-        .cssContainer({"width":"720px"})
-        .checkboxWarning("You must consent before continuing.")
-        .print()
-    ,
-    newButton("continue", "Click to continue")
-        .center()
-        .print()
-        .wait(getHtml("consent_form").test.complete()
-                  .failure(getHtml("consent_form").warn())
-        )
-);
-
-
-// Template("practice.csv", row => {
-//     newTrial("practice",
-//             newText("How acceptable is the following sentence? Use the slider to indicate a score with 0 as low and 100 as high.", "<p>"+row.sentence+"</p>")
-//                 .print("center at 50vw", "middle at 8vh")
-//                 ,
-//             // Acceptability slider
-//             newScale("practicetest", 100)
-//                 .center()
-//                 .size("500px","1em")
-//                 .slider()
-//                 .default(50)
-//             ,
-//             // Labels
-//             newCanvas("container", "500px", "2.25em")
-//                 .add( "left at 0%" , 0 , newText("<i>Completely Unacceptable</i>") )
-//                 // .add( "center at 50%" , 0 , newText("50%") )
-//                 .add( "right at 100%" , 0 , newText("<i>Completely Acceptable</i>") )
-//                 .add( "center at 50%" , "bottom at 100%" , getScale("test") )
-//                 .center()
-//                 .print()
-//             ,
-//             getScale("practicetest")
-//                 .wait()
-//                 .log(),
-//             newText(row.feedback)
-//                 .print("center at 50vw,", "middle at 30vh"),
-//             newButton("continue","continue")
-//                 .print("center at 50vw", "middle at 50vh")
-//                 .wait()
-//     )
-// })
+Template("practice.csv", row => 
+    newTrial("practice",
+            newText("p_instruct", "<i>How acceptable is the following sentence?</i>\n")
+                .center()
+                .print(),
+            newText("<p>" + row.sentence + "</p><br/>")
+                .center()
+                .print(),
+            // Acceptability slider
+            newScale("practicetest", 100)
+                .center()
+                .size("500px","1em")
+                .slider()
+                .default(50)
+            ,
+            // Labels
+            newCanvas("container", "500px", "2.25em")
+                .add( "left at 0%" , 0 , newText("<i>Completely Unacceptable</i>") )
+                // .add( "center at 50%" , 0 , newText("50%") )
+                .add( "right at 100%" , 0 , newText("<i>Completely Acceptable</i>") )
+                .add( "center at 50%" , "bottom at 100%" , getScale("practicetest") )
+                .center()
+                .print()
+            ,
+            getScale("practicetest")
+                .wait()
+                .log(),
+            getText("p_instruct")
+                .text("<p>" + row.feedback + "</p>")
+                .center()
+                .print(),
+            newButton("continue","continue")
+                .print("center at 50vw", "middle at 50vh")
+                .wait()
+    )
+)
 
 Template("cleaned_200_pairs.csv", row => 
     newTrial("experimental_trial",
@@ -157,6 +146,16 @@ var items = [
     ["consent", "Form", { html: { include: "consent.html" } } ],
     ["instructions", "Form", { html: { include: "instructions.html" } } ],
     ["completion", "Form", {continueMessage: null, html: { include: "completion.html" } }],
+    
+    ["startpractice", Message, {consentRequired: false,
+        html: ["div",
+               ["p", "First you can do four practice sentences."]
+              ]}],
+    ["starter", Message, {consentRequired: false,
+        html: ["div",
+               ["p", "Time to start the main portion of the experiment!"]
+              ]}],
+
 
     
 ];
