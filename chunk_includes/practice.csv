@@ -1,5 +1,5 @@
 item,sentence,feedback
-1,The carpet spoke from the cluttered office,"Though this sentence is grammatically correct, carpets cannot speak, so it makes no sense. Therefore, you might select a very low score for it."
-2,Matthew planted the seeds the flowers in the backyard,"The way the words are ordered in this sentence makes little sense, so you might also give this sentence a low score."
-3,In one minute the cousin braided the ribbons tight,"This sentence is gets its meaning across and is thus rather acceptable, but the phrasing of ""braided tight"" might be awkward. You might give it a score higher than 50 but lower than 100."
-4,The girl was sleeping on the recliner by the desk.,"This sentence is sensible and natural, so you might give it a very high score of 100 or close. "
+1,The carpet spoke from the cluttered office,"Though this sentence is grammatically correct, carpets cannot speak, so it makes no sense. Therefore, you might select a very low acceptability for it."
+2,Matthew planted the seeds the flowers in the backyard,"The way the words are ordered in this sentence makes little sense, so you might also give this sentence a low acceptability."
+3,In one minute the cousin braided the ribbons tight,"This sentence is gets its meaning across, but the phrasing of ""braided tight"" might be awkward. You might move the slider towards completely acceptable but not all the way."
+4,The girl was sleeping on the recliner by the desk.,"This sentence is sensible and natural, so you might classify it as completely acceptable or close. "

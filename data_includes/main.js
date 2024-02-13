@@ -1,13 +1,6 @@
 PennController.ResetPrefix()
 var showProgressBar = false;
 
-// var shuffleSequence = seq(  "consent", "instructions",
-//                             "setcounter",
-//                             // Fix to include fillers
-//                             sepWith("sep", "experimental_trial"),
-//                             "sendresults",
-//                             "completion"
-//                          )
 var shuffleSequence = seq( "consent", "IDentry", "demo", "instructions",
                             "startpractice",
                                             
@@ -24,8 +17,8 @@ var shuffleSequence = seq( "consent", "IDentry", "demo", "instructions",
                             "sendresults",
                             "completion"
                             
-                      )
-                         
+                        )
+
 var defaults = [
     "Separator", {
         transfer: 1000,                                      // How long between sentences? (ms)
@@ -34,19 +27,19 @@ var defaults = [
 ];
 
 // Consent form
-// newTrial("consent",
-//     newHtml("consent_form", "consent.html")
-//         .cssContainer({"width":"720px"})
-//         .checkboxWarning("You must consent before continuing.")
-//         .print()
-//     ,
-//     newButton("continue", "Click to continue")
-//         .center()
-//         .print()
-//         .wait(getHtml("consent_form").test.complete()
-//                   .failure(getHtml("consent_form").warn())
-//         )
-// );
+newTrial("consent",
+    newHtml("consent_form", "consent.html")
+        .cssContainer({"width":"720px"})
+        .checkboxWarning("You must consent before continuing.")
+        .print()
+    ,
+    newButton("continue", "Click to continue")
+        .center()
+        .print()
+        .wait(getHtml("consent_form").test.complete()
+                  .failure(getHtml("consent_form").warn())
+        )
+);
 
 
 // Template("practice.csv", row => {
@@ -152,42 +145,6 @@ Template("fillers.csv", row =>
     .log("counter", __counter_value_from_server__)
     .log("item", row.item)
 )
-
-                         
-// Template("Experiment.csv", row => {
-//     items.push(
-//         [[row.label, row.item] , "PennController", 
-//             newTrial(
-//                 // Instructions and sentence?
-//                 newText("trial_sentence", "<p>"+row.sentence+"</p>")
-//                     .center()
-//                     .print(),
-                
-//                 // Acceptability slider
-//                 newScale("test", 100)
-//                     .center()
-//                     .size("500px","1em")
-//                     .slider()
-//                     .default(50)
-//                 ,
-//                 // Labels
-//                 newCanvas("container", "500px", "2.25em")
-//                     .add( "left at 0%" , 0 , newText("<i>Completely Unacceptable</i>") )
-//                     // .add( "center at 50%" , 0 , newText("50%") )
-//                     .add( "right at 100%" , 0 , newText("<i>Completely Acceptable</i>") )
-//                     .add( "center at 50%" , "bottom at 100%" , getScale("test") )
-//                     .center()
-//                     .print()
-//                 ,
-//                 getScale("test").wait().log()
-//             )
-//         .log("sentence", row.sentence)
-//         .log("counter", __counter_value_from_server__)
-//         .log("label", row.label)
-//         .log("item", row.item)]
-//     );
-//   return newTrial('_dummy_',null);
-// })
 
 var items = [
     
