@@ -90,7 +90,7 @@ Template("practice.csv", row =>
                 .center()
                 .print(),
             newButton("continue","continue")
-                .print("center at 50vw", "middle at 50vh")
+                .print("center at 50vw", "middle at 70vh")
                 .wait()
     )
 )
@@ -126,7 +126,7 @@ Template("cleaned_200_pairs.csv", row =>
     )
     .log("sentence", row.sentence) // sentence in question
     .log("construct", row.sent_construct) // DO/PO
-    .log("alternating") // boolean
+    .log("classification", row.classification) // alternating; boolean
     .log("IO", row.recipient_id) // indirect object type
     .log("counter", __counter_value_from_server__)
     .log("group", row.group)
@@ -164,7 +164,7 @@ Template("fillers.csv", row =>
     )
     .log("sentence", row.sentence) // sentence in question
     .log("construct", row.sent_construct) // filler
-    .log("alternating") // low/ high acceptability
+    .log("classification", row.classification) // low/ high acceptability
     .log("IO", row.recipient_id) // N/A
     .log("counter", __counter_value_from_server__)
     .log("group", row.group)
