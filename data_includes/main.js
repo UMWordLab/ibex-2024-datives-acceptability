@@ -26,6 +26,36 @@ var defaults = [
     }
 ];
 
+newTrial("IDentry",
+    newText("instr", "Please enter your Prolific ID:").print(),
+    newHTML("partpage", "<input type='text' id='partID' name='participant ID' min='1' max='12-'>").print(),
+    newButton("Next").print().wait(
+        getVar("partID").set(v=>$("#partID").val()).testNot.is('')
+    )
+)
+
+newTrial("demo",
+    newHTML("Form", "demo.html")
+        .log()
+        .print(),
+    newButton("continue", "Submit")
+    .css("font-size", "medium")
+    .center()
+    .print()
+    .wait(
+        getHTML("Form").test.complete()
+        .failure(getHTML("Form").warn()),
+        newTimer("WaitDemo", 500)
+            .start()
+            .wait()
+    )
+)
+
+Headers(
+    newVar("partID").global()
+)
+.log("partid", getVar("partID"))
+
 Template("practice.csv", row => 
     newTrial("practice",
             newText("p_instruct", "<i>How acceptable is the following sentence?</i>\n")
@@ -91,10 +121,10 @@ Template("cleaned_200_pairs.csv", row =>
         ,
         getScale("test").wait().log()
     )
-    .log("sentence", row.sentence)
-    .log("construct", row.sent_construct)
-    .log("alternating")
-    .log("IO", row.recipient_id)
+    .log("sentence", row.sentence) // sentence in question
+    .log("construct", row.sent_construct) // DO/PO
+    .log("alternating") // boolean
+    .log("IO", row.recipient_id) // indirect object type
     .log("counter", __counter_value_from_server__)
     .log("group", row.group)
     .log("item", row.item)
@@ -128,10 +158,12 @@ Template("fillers.csv", row =>
         ,
         getScale("test").wait().log()
     )
-    .log("sentence", row.sentence)
-    .log("construct", row.sent_construct)
-    .log("alternating")
+    .log("sentence", row.sentence) // sentence in question
+    .log("construct", row.sent_construct) // filler
+    .log("alternating") // low/ high acceptability
+    .log("IO", row.recipient_id) // N/A
     .log("counter", __counter_value_from_server__)
+    .log("group", row.group)
     .log("item", row.item)
 )
 
@@ -157,5 +189,5 @@ var items = [
               ]}],
 
 
-    
+
 ];
