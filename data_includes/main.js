@@ -69,16 +69,16 @@ Template("practice.csv", row =>
             // Acceptability slider
             newScale("practicetest", 100)
                 .center()
-                .size("500px","1em")
+                .size("400px","1em")
                 .slider()
                 .default(50)
             ,
             // Labels
-            newCanvas("container", "500px", "2.25em")
+            newCanvas("container", "800px", "2.25em")
                 .add( "left at 0%" , 0 , newText("<i>Completely Unacceptable</i>") )
                 // .add( "center at 50%" , 0 , newText("50%") )
-                .add( "right at 100%" , 0 , newText("<i>Completely Acceptable</i>") )
-                .add( "center at 50%" , "bottom at 100%" , getScale("practicetest") )
+                .add( "right at 98%" , 0 , newText("<i>Completely Acceptable</i>") )
+                .add( "center at 50%" , 0 , getScale("practicetest") )
                 .center()
                 .print()
             ,
@@ -109,16 +109,16 @@ Template("cleaned_200_pairs.csv", row =>
         // Acceptability slider
         newScale("test", 100)
             .center()
-            .size("500px","1em")
+            .size("400px","1em")
             .slider()
             .default(50)
         ,
         // Labels
-        newCanvas("container", "500px", "2.25em")
-            .add( "left at 0%" , 0 , newText("<i>Completely Unacceptable</i>") )
-            // .add( "center at 50%" , 0 , newText("50%") )
-            .add( "right at 100%" , 0 , newText("<i>Completely Acceptable</i>") )
-            .add( "center at 50%" , "bottom at 100%" , getScale("test") )
+            newCanvas("container", "800px", "2.25em")
+                .add( "left at 0%" , 0 , newText("<i>Completely Unacceptable</i>") )
+                // .add( "center at 50%" , 0 , newText("50%") )
+                .add( "right at 98%" , 0 , newText("<i>Completely Acceptable</i>") )
+                .add( "center at 50%" , 0 , getScale("test") )
             .center()
             .print()
         ,
@@ -147,16 +147,16 @@ Template("fillers.csv", row =>
         // Acceptability slider
         newScale("test", 100)
             .center()
-            .size("500px","1em")
+            .size("400px","1em")
             .slider()
             .default(50)
         ,
         // Labels
-        newCanvas("container", "500px", "2.25em")
+            newCanvas("container", "800px", "2.25em")
             .add( "left at 0%" , 0 , newText("<i>Completely Unacceptable</i>") )
             // .add( "center at 50%" , 0 , newText("50%") )
-            .add( "right at 100%" , 0 , newText("<i>Completely Acceptable</i>") )
-            .add( "center at 50%" , "bottom at 100%" , getScale("test") )
+            .add( "right at 98%" , 0 , newText("<i>Completely Acceptable</i>") )
+            .add( "center at 50%" , 0 , getScale("test") )
             .center()
             .print()
         ,
