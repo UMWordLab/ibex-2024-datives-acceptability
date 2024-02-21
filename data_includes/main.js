@@ -17,7 +17,38 @@ var shuffleSequence = seq( "consent", "IDentry", "demo", "instructions",
                             "sendresults",
                             "completion"
                             
-                        )
+                        );
+
+newTrial("IDentry",
+   newText("instr", "Please enter your Prolific ID:").print(),
+   newHtml("partpage", "<input type='text' id='partID' name='participant ID' min='1' max='120'>").print(),
+   newButton("Next").print().wait(
+       getVar("partID").set( v=>$("#partID").val() ).testNot.is('')
+   )
+)
+
+newTrial("demo",
+   newHtml("Form", "demo.html")
+       .log()
+       .print(),
+   newButton("continue", "Submit")
+       .css("font-size","medium")
+       .center()
+       .print()
+       .wait(   
+           getHtml("Form").test.complete()
+           .failure( getHtml("Form").warn())
+           ,
+           newTimer("waitDemo", 500)
+               .start()
+               .wait()
+           )
+)
+
+Header(
+    newVar("partID").global()
+)
+.log("partid", getVar("partID"))
 
 var defaults = [
     "Separator", {
@@ -26,36 +57,7 @@ var defaults = [
     }
 ];
 
-newTrial("IDentry",
-    newText("instr", "Please enter your Prolific ID:").print(),
-    newHTML("partpage", "<input type='text' id='partID' name='participant ID' min='1' max='12-'>").print(),
-    newButton("Next").print().wait(
-        getVar("partID").set(v=>$("#partID").val()).testNot.is('')
-    )
-)
-
-newTrial("demo",
-    newHTML("Form", "demo.html")
-        .log()
-        .print(),
-    newButton("continue", "Submit")
-    .css("font-size", "medium")
-    .center()
-    .print()
-    .wait(
-        getHTML("Form").test.complete()
-        .failure(getHTML("Form").warn()),
-        newTimer("WaitDemo", 500)
-            .start()
-            .wait()
-    )
-)
-
-Headers(
-    newVar("partID").global()
-)
-.log("partid", getVar("partID"))
-
+// Practice sentences
 Template("practice.csv", row => 
     newTrial("practice",
             newText("p_instruct", "<i>How acceptable is the following sentence?</i>\n")
@@ -93,6 +95,7 @@ Template("practice.csv", row =>
     )
 )
 
+// Test sentences
 Template("cleaned_200_pairs.csv", row => 
     newTrial("experimental_trial",
         // Instructions and sentence?
@@ -130,6 +133,7 @@ Template("cleaned_200_pairs.csv", row =>
     .log("item", row.item)
 )
 
+// Fillers
 Template("fillers.csv", row =>
     newTrial("filler",
         // Instructions and sentence?
@@ -189,5 +193,5 @@ var items = [
               ]}],
 
 
-
+    
 ];
